@@ -43,3 +43,19 @@ for package in "${pipPackagesArray[@]}"; do
 done
 
 sudo apt autoremove
+
+echo "Do you want to install neovim? (y/n)"
+read input
+
+if [ "$input" = "y" ]; then
+  git clone https://github.com/neovim/neovim ~/neovim
+  cd ~/neovim
+  make CMAKE_BUILD_TYPE=Release
+  sudo make install
+
+  echo "Installing the config"
+  git clone https://github.com/PiyushDuggal-source/neovim ~/.config/nvim
+  nvim +PackerSync
+fi
+
+
