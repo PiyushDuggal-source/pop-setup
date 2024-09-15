@@ -6,6 +6,11 @@ sudo apt update && sudo apt upgrade
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
 
+# Install Nerd Fonts
+mkdir -p ~/.local/share/fonts/
+wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/HackNerdFontMono-Regular.ttf
+wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/ComicShannsMono/ComicShannsMonoNerdFont-Regular.otf
+fc-cache -fv
 
 # System wide packages
 systemPackagesArray=(
