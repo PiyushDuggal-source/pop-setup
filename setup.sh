@@ -2,30 +2,38 @@
 
 sudo apt update && sudo apt upgrade
 
+# Install Kitty
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
+
+
+# System wide packages
 systemPackagesArray=(
-    'git'
-    'ripgrep'
-    'xsel'
-    'xclip'
-    'wl-clipboard'
-    'curl'
-    'cargo'
-    'clang-format'
-    'python3-pip'
+  'git'
+  'ripgrep'
+  'xsel'
+  'xclip'
+  'wl-clipboard'
+  'curl'
+  'cargo'
+  'clang-format'
+  'python3-pip'
 )
 
+# Node packages
 npmPackagesArrayG=(
-    "neovim"
-    "prettier"
+  "neovim"
+  "prettier"
 )
 
+# Python packages
 pipPackagesArray=(
-    "black"
-    "beautysh"
+  "black"
+  "beautysh"
 )
 
 for package in "${systemPackagesArray[@]}"; do
-    sudo apt install "$package" -y
+  sudo apt install "$package" -y
 done
 
 # Install NodeJs (20x)
@@ -35,11 +43,11 @@ sudo apt-get install -y nodejs
 node -v
 
 for package in "${npmPackagesArrayG[@]}"; do
-    sudo npm install -g "$package"
+  sudo npm install -g "$package"
 done
 
 for package in "${pipPackagesArray[@]}"; do
-    sudo pip3 install "$package"
+  sudo pip3 install "$package"
 done
 
 sudo apt autoremove
@@ -48,14 +56,12 @@ echo "Do you want to install neovim? (y/n)"
 read input
 
 if [ "$input" = "y" ]; then
-    git clone https://github.com/neovim/neovim ~/neovim
-    cd ~/neovim
-    make CMAKE_BUILD_TYPE=Release
-    sudo make install
+  git clone https://github.com/neovim/neovim ~/neovim
+  cd ~/neovim
+  make CMAKE_BUILD_TYPE=Release
+  sudo make install
 
-    echo "Installing the config"
-    git clone https://github.com/PiyushDuggal-source/neovim ~/.config/nvim
-    nvim +PackerSync
+  echo "Installing the config"
+  git clone https://github.com/PiyushDuggal-source/neovim ~/.config/nvim
+  nvim +PackerSync
 fi
-
-
